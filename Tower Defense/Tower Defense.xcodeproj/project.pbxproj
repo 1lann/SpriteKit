@@ -26,8 +26,8 @@
 		2A8542021957DFF200E2BC60 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A8542001957DFF200E2BC60 /* InfoPlist.strings */; };
 		2A8542041957DFF200E2BC60 /* Tower_DefenseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8542031957DFF200E2BC60 /* Tower_DefenseTests.m */; };
 		2A8542151957E12500E2BC60 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8542141957E12500E2BC60 /* Map.m */; };
+		2A8D58FC195907500024FC24 /* MapObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D58FB195907500024FC24 /* MapObject.m */; };
 		962C38571958471E001A793D /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 962C38561958471E001A793D /* Core.m */; };
-		962C385A19587454001A793D /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 962C385919587454001A793D /* Enemy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,10 +67,10 @@
 		2A8542031957DFF200E2BC60 /* Tower_DefenseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tower_DefenseTests.m; sourceTree = "<group>"; };
 		2A8542131957E12500E2BC60 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		2A8542141957E12500E2BC60 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
+		2A8D58FA195907500024FC24 /* MapObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapObject.h; path = ../MapObject.h; sourceTree = "<group>"; };
+		2A8D58FB195907500024FC24 /* MapObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapObject.m; path = ../MapObject.m; sourceTree = "<group>"; };
 		962C38551958471E001A793D /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
 		962C38561958471E001A793D /* Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
-		962C385819587454001A793D /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
-		962C385919587454001A793D /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,12 +140,9 @@
 				2A8541E91957DFF200E2BC60 /* ViewController.m */,
 				2A8541EB1957DFF200E2BC60 /* MyScene.h */,
 				2A8541EC1957DFF200E2BC60 /* MyScene.m */,
-				2A8542131957E12500E2BC60 /* Map.h */,
-				2A8542141957E12500E2BC60 /* Map.m */,
-				962C385819587454001A793D /* Enemy.h */,
-				962C385919587454001A793D /* Enemy.m */,
 				962C38551958471E001A793D /* Core.h */,
 				962C38561958471E001A793D /* Core.m */,
+				2A8D58FD1959075B0024FC24 /* Map */,
 				2A8541EE1957DFF200E2BC60 /* Spaceship.png */,
 				2A8541F01957DFF200E2BC60 /* Images.xcassets */,
 				2A8541D71957DFF200E2BC60 /* Supporting Files */,
@@ -180,6 +177,17 @@
 				2A8542001957DFF200E2BC60 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2A8D58FD1959075B0024FC24 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				2A8542131957E12500E2BC60 /* Map.h */,
+				2A8542141957E12500E2BC60 /* Map.m */,
+				2A8D58FA195907500024FC24 /* MapObject.h */,
+				2A8D58FB195907500024FC24 /* MapObject.m */,
+			);
+			name = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,11 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A8D58FC195907500024FC24 /* MapObject.m in Sources */,
 				2A8542151957E12500E2BC60 /* Map.m in Sources */,
 				2A8541ED1957DFF200E2BC60 /* MyScene.m in Sources */,
 				962C38571958471E001A793D /* Core.m in Sources */,
 				2A8541EA1957DFF200E2BC60 /* ViewController.m in Sources */,
-				962C385A19587454001A793D /* Enemy.m in Sources */,
 				2A8541E11957DFF200E2BC60 /* AppDelegate.m in Sources */,
 				2A8541DD1957DFF200E2BC60 /* main.m in Sources */,
 			);

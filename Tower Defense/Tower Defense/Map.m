@@ -15,6 +15,7 @@
 
 @property CGPathRef visiblePath;
 @property NSMutableArray* internalPath;
+@property NSMutableDictionary* internalMap;
 @property CGFloat objectWidth;
 @property CGFloat objectHeight;
 
@@ -31,6 +32,8 @@
 		
 		NSLog(@"Width: %f",self.objectWidth);
 		NSLog(@"Height: %f",self.objectHeight);
+        
+        self.internalMap = [[NSMutableDictionary alloc] init];
         
         self.internalPath = [@[@[@1,@1],@[@1,@2],@[@2,@2],@[@3,@2],@[@4,@2],@[@5,@2],@[@6,@2],@[@7,@2],@[@8,@2],@[@9,@2],@[@9,@3],
 							   @[@9,@4],@[@9,@5],@[@8,@5],@[@7,@5],@[@6,@5],@[@5,@5],@[@4,@5],@[@3,@5],@[@2,@5],@[@2,@5],
@@ -67,6 +70,44 @@
 
 - (float)totalTimeForSpeed:(float)tilesPerSecond {
 	return [self.internalPath count]*tilesPerSecond;
+}
+
+- (void)storeObjectAtX:(NSInteger)x y:(NSInteger)y mapObject:(MapObject*)mapObject {
+    if (x <= MAP_WIDTH && x > 0 && y <= MAP_HEIGHT && y > 0) {
+        [self.internalMap setObject:mapObject forKey:[NSString stringWithFormat:@"%i:%i",x,y]];
+    } else {
+        NSLog(@"WARNING: Attempt to place object on invalid location");
+    }
+}
+
+- (MapObject*)retrieveObjectAtX:(NSInteger)x y:(NSInteger)y {
+    if (x <= MAP_WIDTH && x > 0 && y <= MAP_HEIGHT && y > 0) {
+        if (self.internalMap[[NSString stringWithFormat:@"%i:%i",x,y]]) {
+            return self.internalMap[[NSString stringWithFormat:@"%i:%i",x,y]];
+        } else {
+            return [[MapObject alloc] initAsEmpty];
+        }
+    } else {
+        NSLog(@"WARNING: Attempt to retrieve object on invalid location");
+    }
+    return NULL;
+}
+
+- (NSArray*)retrieveObjectsWithType:(NSString *)objectType {
+    NSMutableArray* retObjects = [[NSMutableArray alloc] init];
+    for (MapObject* mapObject in self.internalMap) {
+        if (!mapObject.empty && [mapObject.objectType isEqualToString:objectType]) {
+            [retObjects addObject:mapObject];
+        }
+    }
+    
+    return [retObjects copy];
+}
+
+- (CGPoint)gridFromTouchX:(float)x y:(NSInteger)y {
+    NSInteger gridX = roundf((x + self.objectWidth/2)/self.objectWidth);
+    NSInteger gridY = roundf((y + self.objectHeight/2)/self.objectHeight);
+    return CGPointMake(gridX, gridY);
 }
 
 @end

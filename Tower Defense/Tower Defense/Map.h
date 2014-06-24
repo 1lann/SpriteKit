@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
+#import "MapObject.h"
 
 @interface Map : NSObject
 
@@ -20,5 +21,11 @@ typedef enum {
 - (CGPathRef)returnVisiblePath;
 - (float)returnPathDistance;
 - (float)totalTimeForSpeed:(float)tilesPerSecond;
+
+- (void)storeObjectAtX:(NSInteger)x y:(NSInteger)y mapObject:(MapObject*)mapObject;
+- (MapObject*)retrieveObjectAtX:(NSInteger)x y:(NSInteger)y;
+- (NSArray*)retrieveObjectsWithType:(NSString*)objectType;
+
+- (CGPoint)gridFromTouchX:(float)x y:(NSInteger)y;
 
 @end
