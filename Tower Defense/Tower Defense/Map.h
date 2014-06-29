@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
-#import "MapObject.h"
+#import "TowerObject.h"
 
 @interface Map : NSObject
 
@@ -24,8 +24,8 @@ typedef enum {
 
 - (void)storeObjectAtX:(NSInteger)x y:(NSInteger)y mapObject:(MapObject*)mapObject;
 - (MapObject*)retrieveObjectAtX:(NSInteger)x y:(NSInteger)y;
-- (NSArray*)retrieveObjectsWithType:(NSString*)objectType;
+- (NSArray*)retrieveObjectsWithType:(MapObjectType)objectType;
 
-- (CGPoint)gridFromTouchX:(float)x y:(NSInteger)y;
+- (CGPoint)gridFromTouchPoint:(CGPoint)point;
 
 @end

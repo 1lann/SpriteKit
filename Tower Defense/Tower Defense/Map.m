@@ -29,9 +29,6 @@
     if (self) {
         self.objectWidth = width/MAP_WIDTH;
         self.objectHeight = height/MAP_HEIGHT;
-		
-		NSLog(@"Width: %f",self.objectWidth);
-		NSLog(@"Height: %f",self.objectHeight);
         
         self.internalMap = [[NSMutableDictionary alloc] init];
         
@@ -44,7 +41,7 @@
         CGPathMoveToPoint(path, NULL, [self.internalPath[0][0] floatValue]*self.objectWidth - self.objectWidth/2, [self.internalPath[0][1] floatValue]*self.objectHeight - self.objectHeight/2);
         for (NSArray* coords in self.internalPath) {
             CGPathAddLineToPoint(path, NULL, [coords[0] floatValue]*self.objectWidth - self.objectWidth/2, ([coords[1] floatValue]*self.objectHeight - self.objectHeight/2)*-1);
-        }
+		}
 		
 		self.visiblePath = path;
     }
@@ -61,6 +58,9 @@
 		sprite.position = CGPointMake([coords[0] floatValue]*self.objectWidth - self.objectWidth/2, ([coords[1] floatValue]*self.objectHeight - self.objectHeight/2)*-1);
 		
 		[scene addChild:sprite];
+		
+		MapObject* pathObject = [[MapObject alloc] initWithName:@"Path" imageName:NULL color:NULL objectType:Path spriteObject:NULL scene:scene];
+		[self storeObjectAtX:[coords[0] integerValue] y:[coords[1] integerValue] mapObject:pathObject];
 	}
 }
 
@@ -75,6 +75,7 @@
 - (void)storeObjectAtX:(NSInteger)x y:(NSInteger)y mapObject:(MapObject*)mapObject {
     if (x <= MAP_WIDTH && x > 0 && y <= MAP_HEIGHT && y > 0) {
         [self.internalMap setObject:mapObject forKey:[NSString stringWithFormat:@"%i:%i",x,y]];
+		[mapObject putAtPosition:[self pixelPointFromGridPoint:CGPointMake(x, y)]];
     } else {
         NSLog(@"WARNING: Attempt to place object on invalid location");
     }
@@ -93,10 +94,10 @@
     return NULL;
 }
 
-- (NSArray*)retrieveObjectsWithType:(NSString *)objectType {
+- (NSArray*)retrieveObjectsWithType:(MapObjectType)objectType {
     NSMutableArray* retObjects = [[NSMutableArray alloc] init];
     for (MapObject* mapObject in self.internalMap) {
-        if (!mapObject.empty && [mapObject.objectType isEqualToString:objectType]) {
+        if (!mapObject.empty && (mapObject.objectType == objectType)) {
             [retObjects addObject:mapObject];
         }
     }
@@ -104,10 +105,16 @@
     return [retObjects copy];
 }
 
-- (CGPoint)gridFromTouchX:(float)x y:(NSInteger)y {
-    NSInteger gridX = roundf((x + self.objectWidth/2)/self.objectWidth);
-    NSInteger gridY = roundf((y + self.objectHeight/2)/self.objectHeight);
+- (CGPoint)gridFromTouchPoint:(CGPoint)point {
+    NSInteger gridX = roundf((point.x + self.objectWidth/2)/self.objectWidth);
+    NSInteger gridY = roundf((point.y - self.objectHeight + self.objectHeight/2)/self.objectHeight)*-1;
     return CGPointMake(gridX, gridY);
+}
+
+- (CGPoint)pixelPointFromGridPoint:(CGPoint) point {
+	NSInteger x = point.x*self.objectWidth - self.objectWidth/2;
+	NSInteger y = point.y*-1*self.objectHeight - self.objectHeight/2 + self.objectHeight;
+	return CGPointMake(x, y);
 }
 
 @end
