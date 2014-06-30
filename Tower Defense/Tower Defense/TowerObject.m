@@ -12,14 +12,21 @@
 #warning Need to add support for projectile type/size and damage
 
 - (void)fireTower {
+#warning Temporary
+    self.attackDamage = 1;
 	// Loop over each enemy object
 	for (Enemy *enemy in [self.scene valueForKey:@"enemies"]) {
 		if ([self distanceFromPoint:enemy.position] < 100) {
 			SKAction* action = [SKAction moveTo:enemy.position duration:[self distanceFromPoint:enemy.position]/150];
-			SKSpriteNode* projectile = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(5.0, 5.0)];
+			SKSpriteNode* projectile = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(3.0, 3.0)];
 			projectile.position = self.spriteObject.position;
+            projectile.zPosition = 1;
 			[self.scene addChild:projectile];
-			[projectile runAction:action completion:^(void){[projectile removeFromParent]; [enemy removeFromParent];}];
+			[projectile runAction:action completion:^(void){
+                [projectile removeFromParent];
+                enemy.enemyCheckArray = [self.scene valueForKey:@"enemies"];
+                [enemy takeDamage:self.attackDamage];
+            }];
 			break;
 		}
 	}

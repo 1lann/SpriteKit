@@ -11,5 +11,12 @@
 @interface Enemy : SKSpriteNode
 
 @property BOOL enemy;
+@property SKSpriteNode* visualEnemy;
+@property NSInteger health;
+@property UIColor* visualColor;
+@property NSMutableArray* enemyCheckArray;
+@property NSInteger maxHealth;
+
+- (void)takeDamage:(NSInteger)damage;
 
 @end
