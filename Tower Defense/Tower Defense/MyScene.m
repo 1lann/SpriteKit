@@ -35,9 +35,17 @@
     return self;
 }
 
--(void)spawnVisualEnemy:(NSTimer*)timer {
-    Enemy* enemy = [timer userInfo];
-	SKSpriteNode *sprite = [Enemy spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(10.0, 10.0)];
+-(void)spawnMutlistageEnemy:(NSTimer*)timer {
+    Enemy* enemy = ((NSArray*)[timer userInfo])[0];
+    NSInteger stage = ((NSArray*)[timer userInfo])[1];
+    
+    if (stage >= 0.4) {
+        
+    } else {
+        
+    }
+    
+	SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(10.0, 10.0)];
     sprite.zPosition = 10;
     enemy.visualEnemy = sprite;
 	SKAction *action = [SKAction followPath:[self.map returnVisiblePath] duration:[self.map totalTimeForSpeed:0.5]];
@@ -46,13 +54,15 @@
     [self.enemies addObject:enemy];
 }
 
+
 -(void)spawnEnemies {
-	Enemy *sprite = [Enemy spriteNodeWithColor:[UIColor purpleColor] size:CGSizeMake(0, 0)];
+    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(10.0, 10.0)];
+    [enemy addTargetEnemy:sprite timeDiff:0.6];
 	sprite.enemy = YES;
 	SKAction *action = [SKAction followPath:[self.map returnVisiblePath] duration:[self.map totalTimeForSpeed:0.5]];
 	[sprite runAction:action];
 	[self addChild:sprite];
-	[NSTimer scheduledTimerWithTimeInterval:0.5
+	[NSTimer scheduledTimerWithTimeInterval:0.4
                                      target:self selector:@selector(spawnVisualEnemy:) userInfo:sprite repeats:FALSE];
 }
 

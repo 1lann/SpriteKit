@@ -13,6 +13,7 @@
 
 @property CGFloat attackSpeed;
 @property UIColor* projectileColor;
+@property NSString* towerName;
 
 - (void)startTower;
 

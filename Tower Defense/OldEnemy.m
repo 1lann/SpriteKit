@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Jason Chu. All rights reserved.
 //
 
-#import "Enemy.h"
+#import "OldEnemy.h"
 
-@implementation Enemy
+@implementation OldEnemy
 
 - (void)takeDamage:(NSInteger)damage {
     if (!self.health) {

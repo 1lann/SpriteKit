@@ -15,7 +15,7 @@
 #warning Temporary
     self.attackDamage = 1;
 	// Loop over each enemy object
-	for (Enemy *enemy in [self.scene valueForKey:@"enemies"]) {
+	for (OldEnemy *enemy in [self.scene valueForKey:@"enemies"]) {
 		if ([self distanceFromPoint:enemy.position] < 100) {
 			SKAction* action = [SKAction moveTo:enemy.position duration:[self distanceFromPoint:enemy.position]/150];
 			SKSpriteNode* projectile = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(3.0, 3.0)];
